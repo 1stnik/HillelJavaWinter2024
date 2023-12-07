@@ -5,7 +5,7 @@ public class ChetNumber {
 
     public static void main(String[] args) {
         int number = 1_111_111_111;
-//        System.out.println(calculate(number));
+        System.out.println(calculate(number));
         System.out.println(calc(number));
     }
 
@@ -22,10 +22,10 @@ public class ChetNumber {
     }
 
     private static int calc(int value) {
-        int rez = 0;
+        int rez = 0; // 1
         while (value > 0) {
-            int tmp = value % 10;
-            if (tmp % 2 != 0)
+            int tmp = value % 10; // 2
+            if (tmp % 2 != 0) // 3
                 rez += tmp;
             value = value / 10;
         }
