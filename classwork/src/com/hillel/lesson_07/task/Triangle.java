@@ -42,7 +42,6 @@ public class Triangle {
             }
             System.out.println();
         }
-
     }
 
     private static void drawCenter(int row) {
@@ -62,7 +61,6 @@ public class Triangle {
             }
             System.out.println();
         }
-
     }
 
     private static void drawRight(int row) {
