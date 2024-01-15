@@ -18,4 +18,14 @@ package com.hillel.lesson_09.task;
 
 
 public class PalindromeNumber {
+
+    public static void main(String[] args) {
+
+        System.out.println(isPolindrom("1112111"));
+    }
+
+
+    private static boolean isPolindrom(String str){
+        return new StringBuilder(str).reverse().toString().equals(str);
+    }
 }

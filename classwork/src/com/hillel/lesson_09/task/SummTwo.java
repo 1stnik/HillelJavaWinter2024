@@ -15,5 +15,22 @@ package com.hillel.lesson_09.task;
 //        Example 3:
 //        Input: nums = [3,3], target = 6
 //        Output: [0,1]
+
 public class SummTwo {
+
+    public static void main(String[] args) {
+        int target = 9;
+        Integer[] result = {1, 8, 2, 5, 4, 4, 5, 4};
+        for (int i = 0; i < result.length - 1; i++) {
+            for (int j = 1; j < result.length; j++) {
+                if (result[i] + result[j] == target) {
+                    System.out.println("[" + i + ", " + j + "]");
+                    return;
+                }
+
+            }
+        }
+
+
+    }
 }
