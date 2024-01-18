@@ -12,11 +12,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @Builder
 public class User {
-
     private String name;
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     private String email;
     private String phone;
-
 }
