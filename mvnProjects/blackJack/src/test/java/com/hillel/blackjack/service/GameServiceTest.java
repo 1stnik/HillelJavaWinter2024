@@ -42,6 +42,18 @@ class GameServiceTest {
     }
 
     @Test
+    void calculateBlackJack() {
+        Card card = new Card(Rank.Ace, Suit.Diamonds);
+        Card card2 = new Card(Rank.Ace, Suit.Diamonds);
+
+        List<Card> hand = List.of(card, card2);
+
+        GameService gs = new GameService();
+        assertEquals(21, gs.calculateHandScores(hand));
+
+    }
+
+    @Test
     void getComputerHand(){
         CardDeckService cds = new CardDeckService();
         cds.createDeck(1);
@@ -50,6 +62,50 @@ class GameServiceTest {
 
         GameService gs = new GameService();
         List<Card> hand = gs.computerHand(deck);
+
+        gs.printHand(hand);
+
+        System.out.println();
+        System.out.println("Total score : " + gs.calculateHandScores(hand));
+
+    }
+
+    @Test
+    void getComputerHandAI(){
+        CardDeckService cds = new CardDeckService();
+        cds.createDeck(1);
+
+        // Q♣ K♠ 8♦
+        Card card = new Card(Rank.Queen, Suit.Diamonds);
+        Card card1 = new Card(Rank.King, Suit.Diamonds);
+        Card card2 = new Card(Rank.Seven, Suit.Diamonds);
+
+        Stack<Card> deck = new Stack<>();
+        deck.add(card);
+        deck.add(card1);
+        deck.add(card2);
+
+
+//        Stack<Card> deck = cds.getDeck();
+
+        GameService gs = new GameService();
+        List<Card> hand = gs.computerHandAI(deck);
+
+        gs.printHand(hand);
+
+        System.out.println();
+        System.out.println("Total score : " + gs.calculateHandScores(hand));
+
+    }
+
+    @Test
+    void getComputerHandAI_repeat() {
+        CardDeckService cds = new CardDeckService();
+        cds.createDeck(1);
+        Stack<Card> deck = cds.getDeck();
+
+        GameService gs = new GameService();
+        List<Card> hand = gs.computerHandAI(deck);
 
         gs.printHand(hand);
 
@@ -73,6 +129,6 @@ class GameServiceTest {
     @MethodSource("dataGenerator")
     void checkCalculateResult(Integer pScore, Integer cScore, GameResult result){
         GameService gs = new GameService();
-        assertEquals(result, gs.calculateGAmeResult(cScore, pScore));
+        assertEquals(result, gs.calculateGameResult(cScore, pScore));
     }
 }

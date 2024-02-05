@@ -24,15 +24,39 @@ public class GameService {
         return computerHand;
     }
 
+    public List<Card> computerHandAI(Stack<Card> cardDeck) {
+        Integer result = 0;
+        List<Card> computerHand = new ArrayList<>();
+        computerHand.add(cardDeck.pop());
+        do {
+            computerHand.add(cardDeck.pop());
+            result = calculateHandScores(computerHand);
+            if (isBlackJack(computerHand)) {
+                return computerHand;
+            }
+        } while (result < 17);
+
+        return computerHand;
+    }
+
+
     public void printHand(List<Card> hand) {
         hand.forEach((e -> System.out.print(e + " ")));
     }
 
     public Integer calculateHandScores(List<Card> hand) {
-        return hand.stream().mapToInt(Card::getCost).sum();
+        int sum = hand.stream().mapToInt(Card::getCost).sum();
+        if (isBlackJack(hand)) {
+            return 21;
+        }
+        return sum;
     }
 
-    public GameResult calculateGAmeResult(Integer computer, Integer player) {
+    private boolean isBlackJack(List<Card> hand) {
+        return hand.stream().filter(card -> card.getCost() == 11).count() == 2;
+    }
+
+    public GameResult calculateGameResult(Integer computer, Integer player) {
         if (computer > 21 && player > 21) {
             return GameResult.LOSE;
         } else if (computer > 21) {
