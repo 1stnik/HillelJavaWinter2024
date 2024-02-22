@@ -1,0 +1,31 @@
+// aggregate function example
+
+select s.department,
+       COUNT(s.department) as dep_empl_count,
+       AVG(s.salary) as avarage_salary,
+       SUM(s.salary) as summ_sallary,
+       MIN(s.salary) as min_sallary,
+       MAX(s.salary) as max_sallary
+from sql_salary s group by s.department
+#having dep_empl_count > 80;
+;
+
+
+SELECT s.department, AVG(s.salary) from sql_salary s
+group by s.department;
+
+
+SELECT s.department, count(s.department) from sql_salary s
+group by s.department order by count(s.department) desc ;
+
+
+SELECT s.department, sum(s.salary) from sql_salary s
+group by s.department order by count(s.department) desc ;
+
+
+SELECT s.department, min(s.salary) from sql_salary s
+group by s.department order by count(s.department) desc ;
+
+
+SELECT s.department, max(s.salary) from sql_salary s
+group by s.department order by count(s.department) desc ;
