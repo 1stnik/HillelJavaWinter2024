@@ -25,3 +25,6 @@ replay_pid*
 /out/
 /classwork/classwork.iml
 /mvnProjects/firstMvnProject/target/
+/mvnProjects/converter/target/
+/mvnProjects/spark-java/target/
+/mvnProjects/restExample/target/
