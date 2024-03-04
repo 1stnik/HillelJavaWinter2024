@@ -1,4 +1,4 @@
-package com.sparkjava;
+package com.sparkjava.order;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;

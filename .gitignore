@@ -28,3 +28,5 @@ replay_pid*
 /mvnProjects/converter/target/
 /mvnProjects/spark-java/target/
 /mvnProjects/restExample/target/
+/mvnProjects/StringWTF/.idea/
+/mvnProjects/StringWTF/target/

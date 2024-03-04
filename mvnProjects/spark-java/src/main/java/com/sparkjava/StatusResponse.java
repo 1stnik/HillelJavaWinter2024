@@ -1,7 +1,7 @@
 package com.sparkjava;
 
 public enum StatusResponse {
-    SUCCESS("Success"), ERROR("Error");
+    SUCCESS("Success"), ERROR("Error"), DELETED("Deleted");
 
     final private String status;
 
