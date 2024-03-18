@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <property name="LOG_FOLDER" value="logs"/>
+    <appender name="result"
+        class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>bj/result.log</file>
+
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <encoder>
+            <pattern>%d [%-5level] [%-14.14thread] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="game"
+      class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_FOLDER}/bj/game.log</file>
+
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FOLDER}/bj/game-%d{yyyy-MM-dd}.%i.log.zip</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy
+              class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!-- or whenever the file size reaches 10MB -->
+                <maxFileSize>1MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <!-- keep 1 days' worth of history -->
+            <maxHistory>1</maxHistory>
+            <totalSizeCap>100MB</totalSizeCap>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d [%-5level] [%-14.14thread] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="result" level="info">
+        <appender-ref ref="result"/>
+    </logger>
+
+    <logger name="game" level="info">
+        <appender-ref ref="game"/>
+    </logger>
+
+</configuration>
+

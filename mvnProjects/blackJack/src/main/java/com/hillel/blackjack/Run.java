@@ -11,23 +11,32 @@ import com.hillel.blackjack.service.MoneyService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class Run {
 
+    private static final Logger game = LoggerFactory.getLogger("game");
+    private static final Logger result = LoggerFactory.getLogger("result");
+
+
     public static void main(String[] args) {
+
         System.out.println("Welcome Black Jack : 2024");
+        game.info("start game");
         System.out.println("Please enter you name : ");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
+        game.info("user enter name {}", name);
 
         System.out.println(name + ": Please enter number of games [more then 0]: ");
         Integer gameCount = scanner.nextInt();
         scanner.nextLine();
-
+        game.info("user enter number of games {}", gameCount);
         System.out.println("Put money ... ");
         Integer amount = scanner.nextInt();
-
+        game.info("user enter put money {}", amount);
         Player player = new Player(name, amount);
         Computer computer = new Computer();
 

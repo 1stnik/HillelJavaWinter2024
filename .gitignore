@@ -30,3 +30,6 @@ replay_pid*
 /mvnProjects/restExample/target/
 /mvnProjects/StringWTF/.idea/
 /mvnProjects/StringWTF/target/
+/mvnProjects/logging/target/
+/mvnProjects/logging/logging.iml
+/logs/
