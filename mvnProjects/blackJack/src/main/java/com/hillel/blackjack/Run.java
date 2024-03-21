@@ -10,6 +10,8 @@ import com.hillel.blackjack.service.GameService;
 import com.hillel.blackjack.service.MoneyService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,18 +25,20 @@ public class Run {
 
     public static void main(String[] args) {
 
-        System.out.println("Welcome Black Jack : 2024");
+        ResourceBundle rb = ResourceBundle.getBundle("i10n",new Locale("ru", "UA"));
+
+        System.out.println(rb.getString("welcome"));
         game.info("start game");
-        System.out.println("Please enter you name : ");
+        System.out.println(rb.getString("name"));
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
         game.info("user enter name {}", name);
 
-        System.out.println(name + ": Please enter number of games [more then 0]: ");
+        System.out.println(name + ":" + rb.getString("games"));
         Integer gameCount = scanner.nextInt();
         scanner.nextLine();
         game.info("user enter number of games {}", gameCount);
-        System.out.println("Put money ... ");
+        System.out.println(rb.getString("money"));
         Integer amount = scanner.nextInt();
         game.info("user enter put money {}", amount);
         Player player = new Player(name, amount);
