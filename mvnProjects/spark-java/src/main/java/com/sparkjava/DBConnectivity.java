@@ -9,7 +9,7 @@ public class DBConnectivity {
     private static Connection connection;
     private static String serverTimeZone = "UTC";
     private static String servername = "localhost";
-    private static String databaseName = "hillel";
+    private static String databaseName = "test_lb";
     private static int databasePort = 3306;
     private static String user= "root";
     private static String password = "rootroot";

@@ -11,7 +11,7 @@ public class UserServiceImpl implements UserService {
 
     private final String GET = "select * from user_table";
     private final String INSERT = """
-        insert into user_table (id, first_name, last_name, email)
+        insert into user_table (id, firstname, lastname, email)
         values ('%s', '%s', '%s', '%s');
         """;
 
