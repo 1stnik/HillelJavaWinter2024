@@ -7,6 +7,5 @@ public class Ex5 {
 
         System.out.println(true ? x : 0); // X -> string
         System.out.println(false ? i : x); // 88 -> int <> int
-        System.out.println(false ? 0 : x); //
     }
 }
