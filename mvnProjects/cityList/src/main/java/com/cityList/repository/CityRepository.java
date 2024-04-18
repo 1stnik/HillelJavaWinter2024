@@ -22,5 +22,9 @@ public interface CityRepository extends JpaRepository<City, Long> {
     List<City> findCityByTerm(String term);
 
 
+//    @Query(value = "SELECT * FROM City c WHERE c.name LIKE CONCAT('%',:term,'%')")
+//    List<City> findAllCityByTerm(String term);
+
+
     List<CityProjection> findAllByNameContaining(String term);
 }

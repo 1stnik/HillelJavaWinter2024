@@ -7,6 +7,7 @@ import com.telegram.example.entity.User;
 import com.telegram.example.service.NotificationService;
 import com.telegram.example.service.UserService;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,11 +51,27 @@ public class TelegramBot extends TelegramLongPollingBot {
             log.info("receive from bot : {}", messageText);
             Message message = update.getMessage();
 
+            Notification notification = new Notification();
             if (message.getText().equals("/start")) {
                 registerUser(message);
-            } else if (message.getText().startsWith("/add:")){
-                saveMessage(message);
-            } else if (message.getText().startsWith("/get")){
+            } else if (message.getText().startsWith("/add")) {
+//                saveMessage(message);
+                String text = "please add notification date in format : \n  date: dd.MM.yyyy HH:ss <> message...";
+                sendMessage(message.getChatId(), text);
+
+            } else if (message.getText().startsWith("date: ")) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
+                String date = message.getText();
+                String[] split = date.split("<>");
+                LocalDateTime dateTime = LocalDateTime.parse(split[0].replaceAll("date:", "").trim(), formatter);
+                notification.setUser(userService.getUserByChat(message.getChatId().toString()));
+                notification.setDate(dateTime);
+                notification.setMessage(split[1]);
+
+                notificationService.saveNotification(notification);
+                sendMessage(message.getChatId(), "you create notification...");
+
+            } else if (message.getText().startsWith("/get")) {
                 getMessages(message);
             } else {
                 SendMessage mes = new SendMessage();
@@ -62,8 +79,8 @@ public class TelegramBot extends TelegramLongPollingBot {
                 mes.setText("""
                     available command: 
                     /start    -- register user
-                    /add: ... -- add notification
-                    /get       -- list notifications""");
+                    /add ... -- add notification
+                    /get      -- list notifications""");
 
                 executeMessage(mes);
             }
@@ -74,7 +91,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         var chatId = message.getChatId().toString();
         User userByChat = userService.getUserByChat(chatId);
 
-        if (userByChat == null){
+        if (userByChat == null) {
             User user = new User();
             user.setChatId(message.getChatId().toString());
             user.setName(message.getFrom().getLastName() + " " + message.getFrom().getFirstName());
@@ -82,7 +99,8 @@ public class TelegramBot extends TelegramLongPollingBot {
             userByChat = userService.createUser(user);
         }
 
-        List<NotificationDto> notificatoinList = notificationService.getNotificatoinList(userByChat);
+        List<NotificationDto> notificatoinList = notificationService.getNotificatoinList(
+            userByChat);
 
         StringBuilder stringBuilder = new StringBuilder();
         for (NotificationDto notificationDto : notificatoinList) {
@@ -93,7 +111,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
         String result = stringBuilder.toString();
 
-        if (result.isEmpty()){
+        if (result.isEmpty()) {
             result = "No notifications found";
         }
 
@@ -105,7 +123,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         var chatId = message.getChatId().toString();
         User userByChat = userService.getUserByChat(chatId);
 
-        if (userByChat == null){
+        if (userByChat == null) {
             User user = new User();
             user.setChatId(message.getChatId().toString());
             user.setName(message.getFrom().getLastName() + " " + message.getFrom().getFirstName());
@@ -126,12 +144,12 @@ public class TelegramBot extends TelegramLongPollingBot {
 
         User user = userService.getUserByChat(message.getChatId().toString());
 
-        if (user == null){
+        if (user == null) {
             user = new User();
             user.setChatId(message.getChatId().toString());
             user.setName(message.getFrom().getLastName() + " " + message.getFrom().getFirstName());
 
-           user = userService.createUser(user);
+            user = userService.createUser(user);
 
             SendMessage mes = new SendMessage();
             mes.setChatId(user.getChatId());
@@ -146,14 +164,14 @@ public class TelegramBot extends TelegramLongPollingBot {
 
     }
 
-    public void sendMessage(long chatId, String textToSend){
-               SendMessage message = new SendMessage();
+    public void sendMessage(long chatId, String textToSend) {
+        SendMessage message = new SendMessage();
         message.setChatId(String.valueOf(chatId));
         message.setText(textToSend);
         executeMessage(message);
     }
 
-    private void executeMessage(SendMessage message){
+    private void executeMessage(SendMessage message) {
         try {
             execute(message);
         } catch (TelegramApiException e) {
