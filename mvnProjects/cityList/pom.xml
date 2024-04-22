@@ -23,6 +23,7 @@
 		<guava.version>18.0</guava.version>
 		<mapstruct.version>1.5.3.Final</mapstruct.version>
     <lombok.mapstruct.version>0.2.0</lombok.mapstruct.version>
+    <junit.version>5.10.1</junit.version>
   </properties>
   <dependencies>
     <dependency>
@@ -90,6 +91,18 @@
 			<artifactId>lombok-mapstruct-binding</artifactId>
 			<version>0.2.0</version>
 		</dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-params</artifactId>
+      <version>${junit.version}</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
 
   <build>
