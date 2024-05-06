@@ -22,20 +22,20 @@ public class MongoBsonExample
 
       // Insert new document
 
-//      Document employee = new Document()
-//                             .append("first_name", "Joe")
-//                             .append("last_name", "Smith")
-//                             .append("title", "Java Developer")
-//                             .append("years_of_service", 3)
-//                             .append("skills", Arrays.asList("java", "spring", "mongodb"))
-//                             .append("manager", new Document()
-//                                                   .append("first_name", "Sally")
-//                                                   .append("last_name", "Johanson"));
-//      collection.insertOne(employee);
-//
-//      // Find documents
-//
-//
+      Document employee = new Document()
+                             .append("first_name", "Joe")
+                             .append("last_name", "Smith")
+                             .append("title", "Java Developer")
+                             .append("years_of_service", 3)
+                             .append("skills", Arrays.asList("java", "spring", "mongodb"))
+                             .append("manager", new Document()
+                                                   .append("first_name", "Sally")
+                                                   .append("last_name", "Johanson"));
+      collection.insertOne(employee);
+
+      // Find documents
+
+
 //      Document query = new Document("last_name", "Smith");
 //      List results = new ArrayList<>();
 //      collection.find(query).into(results);
@@ -60,12 +60,12 @@ public class MongoBsonExample
 //         "$push",
 //         new Document("skills", "security"));
 //      collection.updateMany(query, update);
-////
-//      // 4.5 Delete documents
+//
+      // 4.5 Delete documents
 //
       Document query = new Document(
          "years_of_service",
-         new Document("$lt", 1));
+         new Document("$gt", 1));
       collection.deleteMany(query);
    }
 }
