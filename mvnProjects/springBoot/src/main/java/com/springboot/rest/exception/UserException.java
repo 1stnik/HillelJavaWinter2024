@@ -1,4 +1,4 @@
-package com.template.exception;
+package com.exchanger.exception;
 
 public class UserException extends Exception {
 

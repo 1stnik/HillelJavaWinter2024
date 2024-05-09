@@ -1,6 +1,6 @@
-package com.template.controller;
+package com.exchanger.controller;
 
-import com.template.service.KafkaProducer;
+import com.exchanger.service.KafkaProducer;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;

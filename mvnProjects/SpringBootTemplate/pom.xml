@@ -56,8 +56,8 @@
 						<configuration>
 							<classifier>spring-boot</classifier>
 							<mainClass>
-								com.template.Application
-							</mainClass>
+                com.exchanger.Application
+              </mainClass>
 						</configuration>
 					</execution>
 				</executions>

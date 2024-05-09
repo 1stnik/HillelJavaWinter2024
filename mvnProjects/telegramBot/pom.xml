@@ -119,7 +119,7 @@
             <configuration>
               <classifier>spring-boot</classifier>
               <mainClass>
-                com.template.Application
+                com.exchanger.Application
               </mainClass>
             </configuration>
           </execution>

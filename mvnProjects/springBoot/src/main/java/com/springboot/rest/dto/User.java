@@ -1,4 +1,4 @@
-package com.template.dto;
+package com.exchanger.dto;
 
 import lombok.Getter;
 import lombok.Setter;
