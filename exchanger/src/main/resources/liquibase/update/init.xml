@@ -16,4 +16,42 @@
     </createTable>
   </changeSet>
 
+  <changeSet id="ac-user" author="oStepurko">
+    <addColumn tableName="users">
+      <column name="telegram_chat_id" type="long"/>
+    </addColumn>
+  </changeSet>
+
+  <changeSet id="ct-rate" author="oStepurko">
+    <createTable tableName="rate">
+      <column name = "id" type="INT" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="currency" type="varchar(3)"/>
+      <column name="buy" type="VARCHAR(15)"/>
+      <column name="sale" type="VARCHAR(15)"/>
+      <column name="receive" type="TIMESTAMP"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet author="oStepurko" id="ct-wallet">
+    <createTable tableName="wallet">
+      <column name="id" type="INT" autoIncrement="true">
+        <constraints nullable="false" primaryKey="true"/>
+      </column>
+      <column name="currency" type="varchar(3)"/>
+      <column name="balance" type="DECIMAL"/>
+      <column name="last_update" type="TIMESTAMP"/>
+      <column name="user_id" type="INT"/>
+    </createTable>
+  </changeSet>
+
+  <changeSet id="ct-type-currency" author="oStepurko">
+    <sql>
+      ALTER TABLE wallet
+          MODIFY COLUMN currency enum('USD','UAH','EUR');
+
+    </sql>
+  </changeSet>
+
 </databaseChangeLog>

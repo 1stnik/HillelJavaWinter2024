@@ -18,5 +18,10 @@ public class ControllerExceptionHandler {
         return new ResponseEntity("You could not create user. Non unique values", HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(value = {WalletNotFoundException.class})
+    public ResponseEntity<?> handleWalletNotFoundException(Exception ex) {
+        return new ResponseEntity("You could not put money", HttpStatus.BAD_REQUEST);
+    }
+
 
 }
