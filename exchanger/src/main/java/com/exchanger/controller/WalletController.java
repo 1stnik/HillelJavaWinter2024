@@ -1,5 +1,6 @@
 package com.exchanger.controller;
 
+import com.exchanger.dto.TransferApproveDto;
 import com.exchanger.dto.TransferDto;
 import com.exchanger.dto.UserDto;
 import com.exchanger.dto.records.UserRecord;
@@ -34,5 +35,16 @@ public class WalletController {
     @PostMapping("/put")
     public Long put(@RequestBody TransferDto transferDto) {
         return walletService.putMoney(transferDto);
+    }
+
+    @PostMapping("/transfer")
+    public Long transfer(@RequestBody TransferDto transferDto) {
+        return walletService.transfer(transferDto);
+    }
+
+
+    @PostMapping("/transfer/approve")
+    public Long transferApprove(@RequestBody TransferApproveDto transferDto) {
+        return walletService.transferApprove(transferDto);
     }
 }
